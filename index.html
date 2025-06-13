@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador Ecommerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .producto { border: 1px solid #ccc; padding: 16px; margin: 8px; display: inline-block; width: 200px; vertical-align: top; }
+        .carrito { margin-top: 30px; }
+        button { background: #007bff; color: #fff; border: none; padding: 8px 12px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .dropdown { display: inline-block; position: relative; }
+        .dropbtn { background: #007bff; color: #fff; border: none; padding: 8px 12px; cursor: pointer; }
+        .dropbtn:hover { background: #0056b3; }
+        .dropdown-content { display: none; position: absolute; background: #fff; min-width: 120px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; }
+        .dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; }
+        .dropdown-content a:hover { background-color: #f1f1f1 }
+    </style>
+</head>
+<body>
+    <h1>Simulador Ecommerce</h1>
+    <button id="btn-registro">Registrarse</button>
+    <button id="btn-login">Iniciar sesión</button>
+    <button id="btn-logout" style="display:none;">Cerrar sesión</button>
+    <button id="btn-historial" style="display:none;">Historial de compras</button>
+
+    <div class="dropdown">
+        <button id="btn-productos" class="dropbtn">Productos ▼</button>
+        <div id="dropdown-content" class="dropdown-content">
+            <a href="#" onclick="filtrarCategoria('Bombillas')">Bombillas</a>
+            <a href="#" onclick="filtrarCategoria('Termos')">Termos</a>
+            <a href="#" onclick="filtrarCategoria('Mates')">Mates</a>
+        </div>
+    </div>
+
+    <div id="productos"></div>
+    <div class="carrito">
+        <h2>Carrito</h2>
+        <ul id="carrito-lista"></ul>
+        <p id="total"></p>
+        <button onclick="finalizarCompra()">Finalizar compra</button>
+    </div>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/carrito.js"></script>
+    <script src="scripts/registro.js"></script>
+    <script>
+        document.getElementById('btn-registro').onclick = mostrarRegistroUsuario;
+        document.getElementById('btn-login').onclick = mostrarLoginUsuario;
+        document.getElementById('btn-logout').onclick = cerrarSesion;
+        document.getElementById('btn-historial').onclick = mostrarHistorialCompras;
+        // Actualiza el estado de los botones al cargar
+        if (typeof actualizarEstadoSesion === "function") actualizarEstadoSesion();
+    </script>
+    <script>
+        // Mostrar/ocultar menú desplegable
+        document.getElementById('btn-productos').onclick = function() {
+            const menu = document.getElementById('dropdown-content');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        };
+        // Ocultar menú si se hace clic fuera
+        window.onclick = function(event) {
+            if (!event.target.matches('#btn-productos')) {
+                document.getElementById('dropdown-content').style.display = 'none';
+            }
+        };
+
+        // Función para filtrar productos por categoría
+        function filtrarCategoria(categoria) {
+            if (typeof productos !== "undefined" && typeof mostrarProductos === "function") {
+                const filtrados = productos.filter(p => p.categoria === categoria);
+                mostrarProductos(filtrados);
+            }
+            document.getElementById('dropdown-content').style.display = 'none';
+        }
+
+        // Modifica mostrarProductos en main.js para aceptar un array opcional
+        // function mostrarProductos(lista = productos) { ... }
+    </script>
+</body>
+</html>
