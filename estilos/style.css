@@ -18,3 +18,27 @@
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
+
+/* Estilos para el producto */
+.producto {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 8px;
+    display: inline-block;
+    width: 220px;           /* Tamaño fijo */
+    height: 350px;          /* Altura fija */
+    vertical-align: top;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 8px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.producto img {
+    width: 180px;           /* Tamaño fijo para la imagen */
+    height: 180px;
+    object-fit: cover;      /* Recorta la imagen si es necesario */
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
