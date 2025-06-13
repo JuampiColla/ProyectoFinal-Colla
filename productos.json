@@ -23,7 +23,7 @@
     "id": 3,
     "nombre": "Mate Torpedo",
     "precio": 55,
-    "imagen": "imagenes/MateCamionero.jpg",
+    "imagen": "imagenes/MateTorpedo.jpg",
     "descripcion": "Mate torpedo de calabaza, base y virola de acero inoxidable.",
     "stock": 7,
     "categoria": "Mates",
